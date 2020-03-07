@@ -1,29 +1,31 @@
-import io
-import os
+def label():
+    import io
+    import os
 
-# Imports the Google Cloud client library
-from google.cloud import vision
-from google.cloud.vision import types
+    # Imports the Google Cloud client library
+    from google.cloud import vision
+    from google.cloud.vision import types
 
-# Instantiates a client
-client = vision.ImageAnnotatorClient()
+    # Instantiates a client
+    client = vision.ImageAnnotatorClient.from_service_account_json("/Users/kwzhang/Documents/key.json")
 
-# The name of the image file to annotate
-file_name = os.path.abspath('resources/wakeupcat.jpg')
 
-# Loads the image into memory
-with io.open(file_name, 'rb') as image_file:
-    content = image_file.read()
+    # The name of the image file to annotate
+    file_name = os.path.abspath('02.png')
 
-image = types.Image(content=content)
+    # Loads the image into memory
+    with io.open(file_name, 'rb') as image_file:
+        content = image_file.read()
 
-# Performs label detection on the image file
-response = client.label_detection(image=image)
-labels = response.label_annotations
+    image = types.Image(content=content)
 
-print('Labels:')
-for label in labels:
-    print(label.description)
+    # Performs label detection on the image file
+    response = client.label_detection(image=image)
+    labels = response.label_annotations
+
+    print('Labels:')
+    for label in labels:
+        print(label.description)
 
 
 
@@ -31,7 +33,7 @@ def detect_document(path):
     """Detects document features in an image."""
     from google.cloud import vision
     import io
-    client = vision.ImageAnnotatorClient()
+    client = vision.ImageAnnotatorClient.from_service_account_json("/Users/kwzhang/Documents/key.json")
 
     with io.open(path, 'rb') as image_file:
         content = image_file.read()
@@ -64,3 +66,9 @@ def detect_document(path):
             '{}\nFor more info on error messages, check: '
             'https://cloud.google.com/apis/design/errors'.format(
                 response.error.message))
+
+
+def main():
+    detect_document("/Users/kwzhang/Documents/New York University/Spring 2020/HackNYU/04.jpg")
+
+main()
