@@ -1,6 +1,4 @@
 # HackNYU
 
 This is Hack NYU.
-Trying to do an academic calender.
-OR Coronovirus Tracking Map
-Testing
+We are aimed to created a website that do hand-write code recognition.
