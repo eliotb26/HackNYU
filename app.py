@@ -11,4 +11,4 @@ def hello():
 
 @app.route("/test_one")
 def test():
-    return(detect_document_with_newLine())
+    return(detect_document_with_newLine(path))
