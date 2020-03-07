@@ -67,17 +67,17 @@ def detect_document(path):
             'https://cloud.google.com/apis/design/errors'.format(
                 response.error.message))
         
-def detect_document_with_newLine():
+def detect_document_with_newLine(path):
     import os,io
     from google.cloud import vision
     from google.cloud.vision import types
     import pandas as pd
 
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS']=r'Hand write code-1f0460a79a72.json'
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS']=r'/Users/kwzhang/Documents/key.json'
     client = vision.ImageAnnotatorClient()
 
     file_name = 'IMG_0028.jpg'
-    image_path = f'/Users/yuchen/PycharmProject/nyuHack/{file_name}'
+    image_path = path
 
     with io.open(image_path, 'rb') as image_file:
         content = image_file.read()
@@ -109,6 +109,6 @@ def detect_document_with_newLine():
 
 
 def main():
-    detect_document("/Users/kwzhang/Documents/New York University/Spring 2020/HackNYU/04.jpg")
+    detect_document_with_newLine("/Users/kwzhang/Documents/New York University/Spring 2020/HackNYU/04.jpg")
 
 main()
