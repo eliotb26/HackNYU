@@ -21,9 +21,18 @@ def receiver():
 @app.route('/new', methods=['GET'])
 def new():
     ans = detect_document_with_newLine()
-    return "<h1>Testing</h1><p1>%s</p1>"%(ans)
+    temp = display(ans)
+    print(ans)
+    export(ans)
+    return temp
 
+def export(ans):
+    f = open("output.cpp", "w")
+    f.write(ans)
+    f.close()
 
+def display(ans):
+    return '<h1>Testing</h1><div class = "target"><p>%s</p></div>'%(ans)
 
 def decode_base64(dataURL):
     import base64
@@ -46,6 +55,7 @@ def detect_document_with_newLine():
     client = vision.ImageAnnotatorClient()
 
     file_name = 'imageToSave.png'
+    #file_name = 'sign.png'
     image_path = file_name
 
     with io.open(image_path, 'rb') as image_file:
@@ -75,6 +85,16 @@ def detect_document_with_newLine():
 
     return df['description'][0]
 
+def scrappy():
+    import requests
+    from lxml import html
+    print("before")
+    url='http://127.0.0.1:5000/new'#需要爬数据的网址
+    print("reach")
+    page=requests.get(url) 
+    tree=html.fromstring(page.text) 
+    result=tree.xpath("//p/text()")#获取需要的数据
+    print(result)
 
 if __name__ == '__main__':
     app.debug = True
