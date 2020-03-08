@@ -11,7 +11,7 @@ def my_form():
 @app.route('/', methods=['POST'])
 def my_form_post():
     ans = detect_document_with_newLine()
-    return "<p1>%s</p1>"%(ans)
+    return "<h1>Testing</h1><p1>%s</p1>"%(ans)
 
 
 def detect_document_with_newLine():
@@ -29,7 +29,7 @@ def detect_document_with_newLine():
     with io.open(image_path, 'rb') as image_file:
         content = image_file.read()
 
-    # construct an iamge instance
+    # construct an image instance
     image = vision.types.Image(content=content)
 
     """
@@ -37,7 +37,8 @@ def detect_document_with_newLine():
     image = vision.types.Image()
     image.source.image_uri = 'https://edu.pngfacts.com/uploads/1/1/3/2/11320972/grade-10-english_orig.png'
     """
-
+    image = vision.types.Image()
+    image.source.image_uri = 'https://edu.pngfacts.com/uploads/1/1/3/2/11320972/grade-10-english_orig.png'
     # annotate Image Response
     response = client.document_text_detection(image=image)  # returns TextAnnotation
     df = pd.DataFrame(columns=['locale', 'description'])
@@ -58,3 +59,5 @@ def detect_document_with_newLine():
 if __name__ == '__main__':
     app.debug = True
     app.run()
+
+#dsfs
