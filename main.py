@@ -107,8 +107,14 @@ def detect_document_with_newLine(path):
 
     print(df['description'][0])
 
+def decode_base64(src):
+    import base64
+    with open("imageToSave.png", "wb") as fh:
+        fh.write(base64.decodebytes(src))
+    return fh
 
 def main():
+    
     detect_document_with_newLine("04.jpg")
 
 main()

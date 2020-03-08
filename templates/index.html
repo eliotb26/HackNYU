@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      *{
+    box-sizing: border-box;
+  }
+  
+  
+  body, html{
+    width:100%;
+    height:100%
+    margin: 0;
+    display:flex;
+    flex-direction: column;
+  }
+  
+  h1{
+    font-size: 80pt;
+    text-align: center;
+  }
+  .main{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .sub{
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .display{
+    width: 50vw;
+    height:50vh;
+    border-radius: 2px;
+    border: 2px solid black;
+  }
+  
+  #handWrite{
+    width: 50vw;
+    height:50vh;
+    border: 2px solid black;
+  
+  }
+  
+  #can{
+    border: 2px solid red;
+  }
+  
+  #white{
+  
+    top:22%;
+    left:45%;
+    background:white;
+    border:2px solid;
+  }
+  
+  #black{
+  
+    top:25%;
+    left:50%;
+    background:white;
+    border:2px solid;
+  }
+  
+  #canvasimg{
+    top:10%;
+    left:52%;
+    display:none;
+  }
+  
+  #btn{
+    top:55%;
+    left:10%;
+  }
+  
+  #clr{
+    top:55%;
+    left:15%;
+  }
+  
+  .temp{
+    margin: 3vh;
+  }
+    </style>
+    <script src = "http://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript">
+    var canvas, ctx, flag = false,
+    prevX = 0,
+    currX = 0,
+    prevY = 0,
+    currY = 0,
+    dot_flag = false;
+
+var x = "black",
+    y = 4;
+
+
+
+function init() {
+    canvas = document.getElementById('can');
+    ctx = canvas.getContext("2d");
+    container = document.getElementById("handWrite");
+    canvas.width = container.clientWidth;
+    canvas.height = container.clientHeight;
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    w = canvas.width;
+    h = canvas.height;
+
+    canvas.addEventListener("mousemove", function (e) {
+        findxy('move', e)
+    }, false);
+    canvas.addEventListener("mousedown", function (e) {
+        findxy('down', e)
+    }, false);
+    canvas.addEventListener("mouseup", function (e) {
+        findxy('up', e)
+    }, false);
+    canvas.addEventListener("mouseout", function (e) {
+        findxy('out', e)
+    }, false);
+}
+
+function color(obj) {
+    switch (obj.id) {
+        case "black":
+            x = "black";
+            break;
+        case "white":
+            x = "white";
+            break;
+    }
+    if (x == "white") y = 14;
+    else y = 2;
+
+}
+
+function draw() {
+
+    ctx.beginPath();
+    ctx.moveTo(prevX, prevY);
+    ctx.lineTo(currX, currY);
+    ctx.strokeStyle = x;
+    ctx.lineWidth = y;
+    ctx.stroke();
+    ctx.closePath();
+}
+
+function erase() {
+    var m = confirm("Want to clear");
+    if (m) {
+        ctx.clearRect(0, 0, w, h);
+        document.getElementById("canvasimg").style.display = "none";
+    }
+}
+
+function save() {
+    document.getElementById("canvasimg").style.border = "2px solid";
+    var dataURL = canvas.toDataURL();
+    document.getElementById("canvasimg").src = dataURL;
+    document.getElementById("canvasimg").style.display = "inline";
+    console.log(dataURL);
+
+    var wrapper = {'src' : dataURL};
+    $.post('receiver', dataURL, function(){
+
+    });
+    event.preventDefault();
+}
+
+function submit(){
+  var temp;
+  $.get('new', temp, function(){
+
+  });
+}
+
+function pass_values() {
+    var pass_to_python = new Number(7)
+                $.ajax(
+                {
+                    type:'POST',
+                    contentType:'application/json;charset-utf-08',
+                    dataType:'json',
+                    url:'http://127.0.0.1:5500/index.html'+pass_to_python ,
+                    success:function (data) {
+                        var reply=data.reply;
+                        if (reply=="success")
+                        {
+                            return;
+                        }
+                        else
+                            {
+                            alert("some error ocured in session agent")
+                            }
+
+                    }
+                }
+            );
+ }
+
+function findxy(res, e) {
+    if (res == 'down') {
+        prevX = currX;
+        prevY = currY;
+        currX = e.clientX - canvas.offsetLeft;
+        currY = e.clientY - canvas.offsetTop;
+
+        flag = true;
+        dot_flag = true;
+        if (dot_flag) {
+            ctx.beginPath();
+            ctx.fillStyle = x;
+            ctx.fillRect(currX, currY, 2, 2);
+            ctx.closePath();
+            dot_flag = false;
+        }
+    }
+    if (res == 'up' || res == "out") {
+        flag = false;
+    }
+    if (res == 'move') {
+        if (flag) {
+            prevX = currX;
+            prevY = currY;
+            currX = e.clientX - canvas.offsetLeft;
+            currY = e.clientY - canvas.offsetTop;
+            draw();
+        }
+    }
+}
+    </script>
+  </head>
+  <body onload="init()">
+
+    <div class="navbar">
+
+    </div>
+
+    <div class="title">
+      <h1>Hand Write Code!</h1>
+      <div class="sub">
+        <div class="left">
+          <h2>Output</h2>
+
+        </div>
+
+        <div class="right">
+          <h2>Write below!</h2>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="main">
+
+      <div class="display">
+        <p>Them</p>
+      </div>
+
+      <div id="handWrite">
+        <canvas id="can" width></canvas>
+      </div>
+
+    </div>
+
+    <div class="">
+      <div id="white" onclick="color(this)">Eraser</div>
+      <div id="black" onclick="color(black)">Stroke</div>
+
+      <input type="button" value="save" id="btn" size="30" onclick="save()">
+      <input type="button" value="clear" id="clr" size="23" onclick="erase()">
+      <input type="button" value="run!" onclick="submit()">
+    </div>
+
+    <div class = "target">
+        <img id="canvasimg">
+    </div>
+
+  </body>
+</html>
