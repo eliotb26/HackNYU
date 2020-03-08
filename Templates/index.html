@@ -212,7 +212,54 @@
           },
           false
         );
+
+        canvas.addEventListener("touchstart", function (e) {
+        mousePos = getTouchPos(canvas, e);
+  var touch = e.touches[0];
+  var mouseEvent = new MouseEvent("mousedown", {
+    clientX: touch.clientX,
+    clientY: touch.clientY
+  });
+  canvas.dispatchEvent(mouseEvent);
+}, false);
+canvas.addEventListener("touchend", function (e) {
+  var mouseEvent = new MouseEvent("mouseup", {});
+  canvas.dispatchEvent(mouseEvent);
+}, false);
+canvas.addEventListener("touchmove", function (e) {
+  var touch = e.touches[0];
+  var mouseEvent = new MouseEvent("mousemove", {
+    clientX: touch.clientX,
+    clientY: touch.clientY
+  });
+  canvas.dispatchEvent(mouseEvent);
+}, false);
+document.body.addEventListener("touchstart", function (e) {
+  if (e.target == canvas) {
+    e.preventDefault();
+  }
+}, false);
+document.body.addEventListener("touchend", function (e) {
+  if (e.target == canvas) {
+    e.preventDefault();
+  }
+}, false);
+document.body.addEventListener("touchmove", function (e) {
+  if (e.target == canvas) {
+    e.preventDefault();
+  }
+}, false);
+
       }
+
+      function getTouchPos(canvasDom, touchEvent) {
+        var rect = canvasDom.getBoundingClientRect();
+        return {
+          x: touchEvent.touches[0].clientX - rect.left,
+          y: touchEvent.touches[0].clientY - rect.top
+        };
+      }
+
 
       function color(obj) {
         switch (obj.id) {
@@ -303,9 +350,9 @@
       <nav class="navbar navbar-dark bg-dark">
         <nav class="navbar navbar-expand-lg fixed-top ">
           <a class="navbar-brand" href="/">Home</a>
-          
-            
-          
+
+
+
           <img src="{{ url_for('static', filename='Logo.PNG') }}" class="img-fluid" width="50" height="15" &nbsp />
 
           <a href="https://github.com/jeffzhkw/HackNYU">
@@ -317,7 +364,7 @@
             />
           </a>
 
-          <button 
+          <button
             class="navbar-toggler"
             type="button"
             data-toggle="collapse"
