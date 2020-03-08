@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import request
-from flask import render_template
+from flask import render_template, url_for
 
 app = Flask(__name__)
 
@@ -18,6 +18,10 @@ def about():
 def contact():
     return render_template("contact.html")
     
+ 
+
+
+
 @app.route('/receiver', methods=['POST'])
 def receiver():
     if request.method == "POST":
