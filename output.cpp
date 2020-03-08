@@ -1,1 +1,1 @@
-Beffe
+cout<<
