@@ -109,6 +109,6 @@ def detect_document_with_newLine(path):
 
 
 def main():
-    detect_document_with_newLine("04.jpg")
+    detect_document_with_newLine("04.png")
 
 main()

@@ -1,23 +1,28 @@
 from flask import Flask
 from flask import request
 from flask import render_template
+from main.py import detect_document_with_newLine
 
 app = Flask(__name__)
 
 @app.route('/')
 def my_form():
-    return render_template("my-form.html") # this should be the name of your html file
+    return render_template("Test.html") # this should be the name of your html file
+                                        #want this to return the updated website 
 
 @app.route('/', methods=['POST'])
 def my_form_post():
-    text1 = request.form['text1']
-    text2 = request.form['text2']
-    if text1>text2 :
-        return "<h1>text1 larger</h1>"
-    else :
-        return "<h1>text2 larger</h1>"
+    return(detect_document_with_newLine())
+
+    # text1 = request.form['text1']
+    #text2 = request.form['text2']
+    #if text1>text2 :
+    #    return "<h1>text1 larger</h1>"
+    #else :
+    #    return "<h1>text2 larger</h1>"
+
+
 
 if __name__ == '__main__':
     app.run()
 
-#dsfs
