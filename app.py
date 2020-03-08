@@ -1,30 +1,57 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-from main.py import detect_document_with_newLine
 
 app = Flask(__name__)
 
 @app.route('/')
-def my_form():
-    return render_template("Test.html") # this should be the name of your html file
+def index():
+    return render_template("index.html") # this should be the name of your html file
                                         #want this to return the updated website 
 
-@app.route('/', methods=['POST'])
-def my_form_post():
-<<<<<<< HEAD
-    return(detect_document_with_newLine())
 
-    # text1 = request.form['text1']
-    #text2 = request.form['text2']
-    #if text1>text2 :
-    #    return "<h1>text1 larger</h1>"
-    #else :
-    #    return "<h1>text2 larger</h1>"
+@app.route('/about')
+def about():
+    return render_template("about.html")
 
-=======
+
+@app.route('/contact')
+def contact():
+    return render_template("contact.html")
+    
+@app.route('/receiver', methods=['POST'])
+def receiver():
+    if request.method == "POST":
+        data = request.get_data()
+        decode_base64(data)
+        return render_template("index.html")
+
+
+@app.route('/new', methods=['GET'])
+def new():
     ans = detect_document_with_newLine()
-    return "<h1>Testing</h1><p1>%s</p1>"%(ans)
+    temp = display(ans)
+    print(ans)
+    export(ans)
+    return temp
+
+def export(ans):
+    f = open("output.cpp", "w")
+    f.write(ans)
+    f.close()
+
+def display(ans):
+    return '<h1>Testing</h1><div class = "target"><p>%s</p></div>'%(ans)
+
+def decode_base64(dataURL):
+    import base64
+    dataURL = str(dataURL).split(",")
+    dataURL = dataURL[1]
+    dataURL = b"%r"%{dataURL}
+
+    with open("imageToSave.png", "wb") as fh:
+        fh.write(base64.decodebytes(dataURL))
+    return fh
 
 
 def detect_document_with_newLine():
@@ -36,7 +63,8 @@ def detect_document_with_newLine():
     os.environ['GOOGLE_APPLICATION_CREDENTIALS']=r'Hand write code-1f0460a79a72.json'
     client = vision.ImageAnnotatorClient()
 
-    file_name = '04.jpg'
+    file_name = 'imageToSave.png'
+    #file_name = 'sign.png'
     image_path = file_name
 
     with io.open(image_path, 'rb') as image_file:
@@ -50,8 +78,6 @@ def detect_document_with_newLine():
     image = vision.types.Image()
     image.source.image_uri = 'https://edu.pngfacts.com/uploads/1/1/3/2/11320972/grade-10-english_orig.png'
     """
-    image = vision.types.Image()
-    image.source.image_uri = 'https://edu.pngfacts.com/uploads/1/1/3/2/11320972/grade-10-english_orig.png'
     # annotate Image Response
     response = client.document_text_detection(image=image)  # returns TextAnnotation
     df = pd.DataFrame(columns=['locale', 'description'])
@@ -67,14 +93,8 @@ def detect_document_with_newLine():
         )
 
     return df['description'][0]
->>>>>>> 4442f6bf07c27d900b2cac65adc7e44c9ec3f152
-
 
 if __name__ == '__main__':
     app.debug = True
     app.run()
 
-<<<<<<< HEAD
-=======
-#dsfs
->>>>>>> 4442f6bf07c27d900b2cac65adc7e44c9ec3f152
