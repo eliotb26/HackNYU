@@ -5,21 +5,51 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="draw.js"></script>
   </head>
-  <body>
+  <body onload="init()">
+
     <div class="navbar">
 
     </div>
 
+    <div class="title">
+      <h1>Hand Write Code!</h1>
+      <div class="sub">
+        <div class="left">
+          <h2>Output</h2>
+
+        </div>
+
+        <div class="right">
+          <h2>Write below!</h2>
+        </div>
+
+      </div>
+    </div>
+
     <div class="main">
+
       <div class="display">
-
+        <p>Them</p>
       </div>
 
-      <div class="handWrite">
-
+      <div id="handWrite">
+        <canvas id="can" width></canvas>
       </div>
 
+    </div>
+
+    <div class="">
+      <div id="white" onclick="color(this)">Eraser</div>
+      <div id="black" onclick="color(black)">Stroke</div>
+
+      <input type="button" value="save" id="btn" size="30" onclick="save()">
+      <input type="button" value="clear" id="clr" size="23" onclick="erase()">
+    </div>
+
+    <div>
+        <img id="canvasimg">
     </div>
 
   </body>
