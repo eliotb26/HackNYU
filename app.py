@@ -63,7 +63,7 @@ def detect_document_with_newLine():
     from google.cloud.vision import types
     import pandas as pd
 
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS']=r'Hand write code-1f0460a79a72.json'
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS']=r'/Users/yuchen/Downloads/key.json'
     client = vision.ImageAnnotatorClient()
 
     file_name = 'imageToSave.png'

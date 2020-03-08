@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  	<title>Bootstrap 4 landing page</title>
+  	<title>About</title>
 	 <!-- add bootstrap css file -->
 
     <!-- Latest compiled and minified CSS -->
@@ -168,6 +168,27 @@
         padding: 1em;
     }
 
+    .mid{
+        display:flex;
+        flex-wrap: nowrap;
+    }
+
+    .mid p{
+        margin: 10px;
+        margin-left: 40px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 18pt;
+        text-indent: 2em;
+    }
+    #temp{
+        display: flex;
+        flex-direction: column;
+    }
+
+    h1{
+        margin:10vh;
+    }
+
   </style> 
 
 
@@ -190,7 +211,7 @@
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
            <span class="navbar-toggler-icon"></span>
          </button>
-         <img src="Logo.png" class="img-fluid" width="70" height="15" &nbsp>
+         <img src="{{ url_for('static', filename='Logo.PNG') }}" class="img-fluid" width="50" height="15" &nbsp>
      
           <a href="https://github.com/jeffzhkw/HackNYU">
            <img src="https://pbs.twimg.com/profile_images/1157035760085684224/iuxTnT5g_400x400.jpg" class="img-fluid" width="50" height="15">
@@ -211,85 +232,41 @@
 
   </body>
   <h1 class="text-center">About Us</h1>
-		<div class="row">
-			<div class="col-md-10 col-lg-7 col-sm-12">
-
-    <p>
-      MeCode is a practical tool in the Computer Science learning environment.
-      As touch-screen devices, such as Ipad and Surface Pro,
-      become common tools in learning environment, more and more people
-      are replacing notebooks with these devices. However, these devices are not properly equipt
-      with software that makes writing notes for code easy until now. MeCode allows for the user to 
-      take notes and directly transfer these notes to functional code. Using computer vison machine learning API's, 
-      MeCode is able to understand the users handwriting while the user is taking notes. This now allows for 
-      the personal feel of writing notes, with the ability to test and control your outputs at the same time. 
-      <br></br>
-      This is not only meant for students, but also can be used to help professors lead courses.
-      Professors can now continue guiding courses with the personal touch other their hand, while still being 
-      able to connect with their code. Not to mention, this also eliminates messy handwriting that students 
-      cannot read. 
-      <br> </br> 
-      So we inventred MeCode, a new way to "write" code.  
-      <br> 
-
+		<div>
+			<div class="">
+    <div class = "mid">
+        <div id = "temp">
+        <p>
+            LetMeCode is a practical tool in the Computer Science learning environment.
+            As touch-screen devices, such as Ipad and Surface Pro,
+            become common tools in learning environment, more and more people
+            are replacing notebooks with these devices. However, these devices are not properly equipt
+            with software that makes writing notes for code easy until now. MeCode allows for the user to 
+            take notes and directly transfer these notes to functional code. Using computer vison machine learning API's, 
+            MeCode is able to understand the users handwriting while the user is taking notes. This now allows for 
+            the personal feel of writing notes, with the ability to test and control your outputs at the same time. </p>
+            <p>
+            This is not only meant for students, but also can be used to help professors lead courses.
+            Professors can now continue guiding courses with the personal touch other their hand, while still being 
+            able to connect with their code. Not to mention, this also eliminates messy handwriting that students 
+            cannot read. </p>
+            <p>
+            So we inventred MeCode, a new way to "write" code.  
+             
+            </p>
+        </div>
+            <img src="{{ url_for('static', filename='Figure_1.PNG') }}" width = 800px;></img>
+    </div>
+    
             </div>
         </div>
     </h1>
+    
 
     
 
     </body>
 
-    <div class="Blog" id="Blog">
-	<div class="container">
-	<h1 class="text-center">Team</h1>
-		<div class="row">
-			<div class="col-md-4 col-lg-4 col-sm-12">
-				<div class="card">					
-					<div class="card-body">
-					<h4 class="card-title">Eliot Brown</h4>
-						<p class="card-text">
-							Major: Computer Engneering, Sophomore in NYU Tandon <br></br>
-                            Minor: Business Studies
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4 col-lg-4 col-sm-12">
-				<div class="card">					
-					<div class="card-body">
-					   <h4 class="card-title">Yuchen Liu</h4>
-						<p class="card-text">
-                            Major: Computer Science, Sophomore in NYU Tandon <br></br>
-                            Minor: Mathematics 
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4 col-lg-4 col-sm-12">
-				<div class="card">
-					<div class="card-body">
-					<h4 class="card-title">Chris Xu</h4>
-						<p class="card-text">
-							Major: Computer Science, Sophomore in NYU Tandon  <br></br>
-                            Minor: Game Engineering 
-						</p>
-					</div>
-				</div>
-			</div>
-            <div class="col-md-4 col-lg-4 col-sm-12" id="4">
-				<div class="card">					
-					<div class="card-body">
-					<h4 class="card-title">Kewei Zhang</h4>
-						<p class="card-text">
-							Major: Computer Science, Sophomore in NYU Tandon <br></br>
-                            Minor: Integrated Digital Media
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+
 
 </html>
