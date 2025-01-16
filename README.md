@@ -1,7 +1,7 @@
 # HackNYU
 
 This is Hack NYU.
-We are aimed to created a website that do hand-write code recognition.
+We are aimed to created a website that transfers handwritten text to code. For instance, a user might take notes in their CS class on their ipad, LetMeCode enables the user to be able to export this handwritten text to their perferred IDE such as VSCode. 
 
 Can be found @ https://eliotb26.github.io/HackNYU/
 
